@@ -1,0 +1,314 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap');
+@import 'vars';
+@import 'mixins';
+@import 'themes';
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Josefin Sans', sans-serif; 
+}
+
+ul {
+  list-style: none;
+}
+
+button, li {
+  outline-color: $bright-blue;
+}
+
+/* LAYOUT
+--------------------*/
+.container {
+  min-height: 100vh;
+  width: 100vw;
+  @include backgroundImg;
+  @include apply-theme-color('background-color', 'color-bg');
+}
+
+.main {
+  max-width: 540px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  @include mobile {
+    max-width: 90%;
+  }
+}
+
+/* HEADER 
+ --------------------*/
+
+.header {
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 70px;
+  margin-bottom: 50px;
+  .title {
+    letter-spacing: 15px;
+    font-size: 40px;
+    font-weight: 700;
+  }
+}
+
+.btn-switch {
+  background-color: transparent;
+  cursor: pointer;
+  border: none;
+  width: 25px;
+  height: 25px;
+}
+
+.attribution {
+  position: fixed;
+  padding: 10px;
+  text-align: center;
+  font-size: 12px;
+  width: 100%;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  box-shadow: 0px -5px 5px rgba(68, 68, 68, 0.1);
+  @include apply-theme-color('background-color', 'color-bg');
+  @include apply-theme-color('color', 'color-list-text');
+  a {
+    color: $bright-blue;
+  }
+  > p {
+    letter-spacing: .4px; 
+    opacity: 1;
+  }
+  .love {
+    margin: 0 5px;
+  }
+}
+
+/* Form  
+ --------------------*/
+
+.input-wrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  border-radius: 5px;
+  @include apply-theme-color('background', 'color-list-bg');
+  @include apply-theme-color('box-shadow', 'shadow');
+  input {
+    &:focus {
+      @include apply-theme-color('color', 'color-input');
+    }
+    &::placeholder {
+      @include apply-theme-color('color', 'color-input-placeholder');
+    }
+  }
+}
+
+input {
+  font-size: 18px;
+  letter-spacing: -0.25px;
+  background-color: transparent;
+  border-color: transparent;
+  width: 100%;
+  position: relative;
+  &::placeholder {
+    color: #9495A5;
+  }
+}
+
+input:focus {
+  outline: pink;
+}
+
+.input-check {
+  outline: none;
+  display: inline-block;
+  border-radius: 50%;
+  height: 24px;
+  width: 24px;
+  margin-right: 10px;
+  background: transparent;
+  @include apply-theme-color('border', 'border');
+}
+
+/* LIST
+--------------------*/
+.todo-list-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  max-width: 540px;
+  margin-top: 25px;
+  border-radius: 5px;
+  min-height: 300px;
+  @include apply-theme-color('background', 'color-list-bg');
+  @include apply-theme-color('box-shadow', 'shadow');
+}
+
+.todo-item{
+  position: relative;
+  cursor: pointer;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  font-size: 18px;
+  letter-spacing: -0.25px;
+  @include apply-theme-color('color', 'color-list-text');
+  @include apply-theme-color('border-bottom', 'border');
+  &.completed {
+    @include apply-theme-color('color', 'color-list-text-completed');
+    text-decoration: line-through;
+  }
+  &:first-of-type {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+  }
+  .description {
+    display: flex;
+    align-items: center;
+  }
+  .item-check-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  .item-check {
+    display: inline-block;
+    border-radius: 50%;
+    height: 24px;
+    width: 24px;
+    background: transparent;
+    &.completed {
+      background: url('../assets/images/icon-check.svg'), linear-gradient(135deg, hsl(192, 100%, 67%),hsl(280, 87%, 65%));
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+  }
+  .delete-icon {
+    transition: opacity 0.5s ease-in-out;
+    background: transparent;
+    border: none;
+    opacity: 0;
+    cursor: pointer;
+    & > path {
+      @include apply-theme-color('fill', 'color-path');
+    }
+    &:focus {
+      opacity: 1;
+    }
+  }
+  &:not(:hover) {
+    .item-check:not(.completed) {
+      @include apply-theme-color('border', 'border');
+    }
+  }
+  &:hover,
+  &:focus {
+    .delete-icon{
+      opacity: 1;
+    }
+    .item-check-wrapper {
+      background: linear-gradient(135deg, hsl(192, 100%, 67%),hsl(280, 87%, 65%));
+      .item-check {
+        &:not(.completed) {
+          width: 22px;
+          height: 22px;
+          @include apply-theme-color('background', 'color-list-bg');
+        }
+      }
+    }
+  }
+}
+
+.todo-list-footer {
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .items-left {
+    display: block;
+    width: 100px;
+    @include apply-theme-color('color', 'color-btn');
+    font-size: 14px;
+    letter-spacing: -0.25px;
+  }
+  .filter-wrapper {
+    @include mobile {
+      display: none;
+    }
+  }
+}
+
+.btn-clear {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  @include apply-theme-color('color', 'color-btn');
+  &:focus {
+    border: none;
+  }
+  &:hover {
+    @include apply-theme-color('color', 'color-btn-hover');
+  }
+}
+
+/* FILTER
+--------------------*/
+.filter-wrapper {
+  display: flex;
+  width: 166px;
+  justify-content: space-between;
+  .filter-option{
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    background: transparent;
+    border: none;
+    padding: 10px;
+    @include apply-theme-color('color', 'color-text-light');
+    &:focus {
+      border: none;
+    }
+    &:hover {
+      @include apply-theme-color('color', 'color-btn-hover');
+    }
+    &.selected {
+      color: #3A7CFD;
+    }
+  }
+  @include mobile {
+    width: 100%;
+    padding: 20px;
+    margin-top: 15px;
+    border-radius: 5px;
+    .filter-option {
+      margin-right: 20px;
+    }
+    justify-content: center;
+    @include apply-theme-color('background', 'color-list-bg');
+    @include apply-theme-color('box-shadow', 'shadow');
+  }
+}
+
+.filter-mobile {
+  @include tablet {
+    display: none;
+  }
+}
+
+/* INFO
+--------------------*/
+.dnd-info {
+  display: block;
+  margin: 40px auto 80px auto;
+  @include apply-theme-color('color', 'color-text-light');
+}
