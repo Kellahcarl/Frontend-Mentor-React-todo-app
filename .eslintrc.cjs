@@ -1,20 +1,19 @@
 module.exports = {
-  root: true,
-  env: { browser: true, es2020: true },
+  parser: "@typescript-eslint/parser",
   extends: [
-    'eslint:recommended',
-    'plugin:react/recommended',
-    'plugin:react/jsx-runtime',
-    'plugin:react-hooks/recommended',
+    "airbnb",
+    "plugin:react/recommended",
+    "plugin:jsx-a11y/recommended",
   ],
-  ignorePatterns: ['dist', '.eslintrc.cjs'],
-  parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
-  settings: { react: { version: '18.2' } },
-  plugins: ['react-refresh'],
-  rules: {
-    'react-refresh/only-export-components': [
-      'warn',
-      { allowConstantExport: true },
-    ],
+  plugins: ["@typescript-eslint", "react", "jsx-a11y"],
+  parserOptions: {
+    ecmaVersion: 2021,
+    sourceType: "module",
+    ecmaFeatures: {
+      jsx: true,
+    },
   },
-}
+  rules: {
+    // Add your project-specific rules here
+  },
+};
