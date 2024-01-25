@@ -80,7 +80,7 @@ const App = () => {
             theme={theme}
           />
         </div>
-        <span className={`dnd-info`}>Drag and drop to reorder list</span>
+        
       </div>
       
     </div>
